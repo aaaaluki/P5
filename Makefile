@@ -23,7 +23,7 @@ help:
 	@echo '----------------------------------------------------------------'
 
 release: ${FILE_RELEASE} ${PREFIX}
-	ninja install -C ${BUILD_RELEASE}
+	ninja -v install -C ${BUILD_RELEASE}
 
 ${FILE_RELEASE}:
 	meson --buildtype=release --prefix=${PREFIX} --libdir=lib ${BUILD_RELEASE}
@@ -32,7 +32,7 @@ clean_release:
 	\rm -rf ${BUILD_RELEASE}
 
 debug: ${FILE_DEBUG} ${PREFIX}
-	ninja install -C ${BUILD_DEBUG}
+	ninja -v install -C ${BUILD_DEBUG}
 
 ${FILE_DEBUG}:
 	meson --buildtype=debug --prefix=${PREFIX} --libdir=lib ${BUILD_DEBUG}
@@ -45,7 +45,7 @@ all: release debug
 clean: clean_release clean_debug
 
 doc: ${PREFIX}
-	ninja doc -C ${BUILD_RELEASE}
+	ninja -v doc -C ${BUILD_RELEASE}
 
 $(PREFIX):
 	mkdir -p ${PREFIX}/bin
