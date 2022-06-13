@@ -25,22 +25,59 @@ Ejercicios.
 Tomando como modelo un instrumento sencillo (puede usar el InstrumentDumb), genere cuatro instrumentos que
 permitan visualizar el funcionamiento de la curva ADSR.
 
+El fichero de los que contiene los instrumentos mostrados a continuación es [dumb.orc](work/dumb.orc).
+
 * Un instrumento con una envolvente ADSR genérica, para el que se aprecie con claridad cada uno de sus
   parámetros: ataque (A), caída (D), mantenimiento (S) y liberación (R).
+
+    ```text
+    # Generic ADSR
+    1	InstrumentDumb	ADSR_A=0.20; ADSR_D=0.10; ADSR_S=0.20; ADSR_R=0.30; N=16;
+    ```
+    ![Generic](img/generic-adsr.png)
+
 * Un instrumento *percusivo*, como una guitarra o un piano, en el que el sonido tenga un ataque rápido, no
   haya mantenimiemto y el sonido se apague lentamente.
   - Para un instrumento de este tipo, tenemos dos situaciones posibles:
     * El intérprete mantiene la nota *pulsada* hasta su completa extinción.
+
+    ```text
+    # Percusive 1 ADSR
+    2	InstrumentDumb	ADSR_A=0.01; ADSR_D=0.20; ADSR_S=0.00; ADSR_R=0.00; N=127;
+    ```
+    ![Percusive 1](img/percusive1-adsr.png)
+
+
     * El intérprete da por finalizada la nota antes de su completa extinción, iniciándose una disminución
 	  abrupta del sonido hasta su finalización.
+    
+    ```text
+    # Percusive 2 ADSR
+    3	InstrumentDumb	ADSR_A=0.01; ADSR_D=0.20; ADSR_S=0.00; ADSR_R=0.01; N=127;
+    ```
+    ![Percusive 2](img/percusive2-adsr.png)
+
   - Debera representar en esta memoria **ambos** posibles finales de la nota.
+
 * Un instrumento *plano*, como los de cuerdas frotadas (violines y semejantes) o algunos de viento. En
   ellos, el ataque es relativamente rápido hasta alcanzar el nivel de mantenimiento (sin sobrecarga), y la
   liberación también es bastante rápida.
 
+    ```text
+    # Plain ADSR
+    4	InstrumentDumb	ADSR_A=0.05; ADSR_D=0.00; ADSR_S=0.40; ADSR_R=0.60; N=92;
+    ```
+    ![Plain](img/plain-adsr.png)
+
 Para los cuatro casos, deberá incluir una gráfica en la que se visualice claramente la curva ADSR. Deberá
 añadir la información necesaria para su correcta interpretación, aunque esa información puede reducirse a
 colocar etiquetas y títulos adecuados en la propia gráfica (se valorará positivamente esta alternativa).
+
+
+*Nota:* Ficheros generados para este ejercicio:
+-   [Instrumentos (.orc)](work/adsr.orc)
+-   [Partitura (.sco)](work/adsr.sco)
+-   [Audio (.wav)](work/adsr.wav)
 
 ### Instrumentos Dumb y Seno.
 
