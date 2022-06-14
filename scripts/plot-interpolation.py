@@ -21,13 +21,12 @@ il = 2**15
 ir = il + 2**7
 
 mark = 'o'
-marksize = 8
 
 plottype = plt.scatter
 
-plottype(t[il:ir], tablel[il:ir], marker=mark, s=marksize, c='blue', label='Ceil values')
-plottype(t[il:ir], tabler[il:ir], marker=mark, s=marksize, c='red', label='Floor values')
-plottype(t[il:ir], tablelerp[il:ir], marker=mark, s=4*marksize, c='green', label='Lerp values')
+plottype(t[il:ir], tablel[il:ir], marker=mark, s=2, c='blue', label='Ceil values')
+plottype(t[il:ir], tabler[il:ir], marker=mark, s=2, c='red', label='Floor values')
+plottype(t[il:ir], tablelerp[il:ir], marker=mark, s=6, c='green', label='Lerp values')
 
 plt.title('Table interpolation')
 plt.xlabel('Time [s]')
