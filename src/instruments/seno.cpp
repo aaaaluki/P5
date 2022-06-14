@@ -75,7 +75,7 @@ const vector<float> & Seno::synthesize() {
     }
 
     // Get base and fraction indices
-    il = (int)floorl(index);
+    il = (int)floor(index);
     frac = index - (float)il;
 
     // See if left index is last sample or not
@@ -87,7 +87,9 @@ const vector<float> & Seno::synthesize() {
 
     // Lerp
     x[i] = A * ((1-frac)*tbl[il] + frac*tbl[ir]);
-    printf("%.10f\t%.10f\t%.10f\n", tbl[il], tbl[ir], ((1-frac)*tbl[il] + frac*tbl[ir]));
+
+    // Uncomment to get data to plot
+    // printf("%.10f\t%.10f\t%.10f\n", tbl[il], tbl[ir], ((1-frac)*tbl[il] + frac*tbl[ir]));
   }
 
   //apply envelope to x and update internal status of ADSR
