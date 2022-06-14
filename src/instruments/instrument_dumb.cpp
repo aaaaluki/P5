@@ -39,12 +39,16 @@ void InstrumentDumb::command(long cmd, long note, long vel) {
     bActive = true;
     adsr.start();
     index = 0;
-	A = vel / 127.;
-  }
-  else if (cmd == 8) {	//'Key' released: sustain ends, release begins
+
+    if (vel > 127) {
+        vel = 127;
+    }
+    A = vel / 127.0f;
+
+  } else if (cmd == 8) {	//'Key' released: sustain ends, release begins
     adsr.stop();
-  }
-  else if (cmd == 0) {	//Sound extinguished without waiting for release to end
+    
+  } else if (cmd == 0) {	//Sound extinguished without waiting for release to end
     adsr.end();
   }
 }
