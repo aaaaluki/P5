@@ -85,9 +85,137 @@ Implemente el instrumento `Seno` tomando como modelo el `InstrumentDumb`. La se�
 mediante búsqueda de los valores en una tabla.
 
 - Incluya, a continuación, el código del fichero `seno.cpp` con los métodos de la clase Seno.
+  ```cpp
+    #include <iostream>
+    #include <math.h>
+    #include "seno.h"
+    #include "keyvalue.h"
+
+    #include <stdlib.h>
+
+    using namespace upc;
+    using namespace std;
+
+    Seno::Seno(const std::string &param) 
+    : adsr(SamplingRate, param) {
+    bActive = false;
+    x.resize(BSIZE);
+
+    /*
+        You can use the class keyvalue to parse "param" and configure your instrument.
+        Take a Look at keyvalue.h    
+    */
+    KeyValue kv(param);
+
+    if (!kv.to_int("N", N)) {
+        N = 40; //default value
+    }
+
+    //Create a tbl with one period of a sinusoidal wave
+    tbl.resize(N);
+    float phase = 0, step = 2 * M_PI /(float) N;
+    index = 0.0f;
+
+    for (int i=0; i < N ; ++i) {
+        tbl[i] = sin(phase);
+        phase += step;
+    }
+    }
+
+
+    void Seno::command(long cmd, long note, long vel) {
+    if (cmd == 9) {		//'Key' pressed: attack begins
+        bActive = true;
+        adsr.start();
+        index = 0;
+
+        if (vel > 127) {
+            vel = 127;
+        }
+        A = vel / 127.0f;
+
+        float f0_note = 440 * powf(2, (note - 69.0f) / 12.0f);
+        delta_idx = (float)N * f0_note / SamplingRate;
+        
+    } else if (cmd == 8) {	//'Key' released: sustain ends, release begins
+        adsr.stop();
+
+    } else if (cmd == 0) {	//Sound extinguished without waiting for release to end
+        adsr.end();
+    }
+    }
+
+
+    const vector<float> & Seno::synthesize() {
+    if (not adsr.active()) {
+        x.assign(x.size(), 0);
+        bActive = false;
+        return x;
+
+    } else if (not bActive) {
+        return x;
+    }
+
+    float frac;
+    int il, ir;
+
+    for (unsigned int i = 0; i < x.size(); ++i, index += delta_idx) {
+        // Check out of bounds
+        if (index > (float)tbl.size()) {
+            index -= (float) tbl.size();
+        }
+
+        // Get base and fraction indices
+        il = (int)floorl(index);
+        frac = index - (float)il;
+
+        // See if left index is last sample or not
+        ir = il + 1;
+        if (il == (int)tbl.size() - 1) {
+        ir = 0;
+        index -= tbl.size();
+        }
+
+        // Lerp
+        x[i] = A * ((1-frac)*tbl[il] + frac*tbl[ir]);
+    }
+
+    //apply envelope to x and update internal status of ADSR
+    adsr(x);
+
+    return x;
+    }
+  ```
+
 - Explique qué método se ha seguido para asignar un valor a la señal a partir de los contenidos en la tabla,
   e incluya una gráfica en la que se vean claramente (use pelotitas en lugar de líneas) los valores de la
   tabla y los de la señal generada.
+
+  El primer paso es calcular el tono de la nota, en hercios, a partir de su valor en semitonos. Esto se hace
+  a partir de la formula dada en el enunciado:
+  ```cpp
+  float f0_note = 440 * powf(2, (note - 69.0f) / 12.0f);
+  ```
+
+  Una vez se tiene el tono se debe calcular el avance del indice con la siguiente fórmula:
+  ```cpp
+  delta_idx = (float)N * f0_note / SamplingRate;
+  ```
+
+  Como esta delta seguramente no sera un valor entero se tendran indices no enteros, para solucionar esto hay
+  dos maneras:
+    - Redondear: La mas fácil de implementar. (**No implementado**)
+    - Interpolación lineal, que es por la que he optado. En este caso se usa la parte decimal del indice
+      como peso.
+  
+  *Nota:* A la hora de interpolar puede que se tenga que hacer entre la última y primera muestra.
+
+  En la siguiente imagen se pueden ver los valores de la tabla y los valores interpolados:
+
+  ![Table interpolation](img/table-interpolation.png)
+
+  Generado con: [plot-interpolation.py](scripts/plot-interpolation.py)
+  
 - Si ha implementado la síntesis por tabla almacenada en fichero externo, incluya a continuación el código
   del método `command()`.
 
