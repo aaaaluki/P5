@@ -216,14 +216,50 @@ mediante búsqueda de los valores en una tabla.
     
 - Si ha implementado la síntesis por tabla almacenada en fichero externo, incluya a continuación el código
   del método `command()`.
+ 
+  El método `command()` es el mismo que para el fichero [seno.cpp](src/instruments/seno.cpp). Lo único que
+  varia es el constructor, en este se supone que el fichero solo contiene un periodo del señal y el numero
+  de muestras del fichero es `N`.
 
-  **TODO**
+  ```cpp
+    FicTabla::FicTabla(const std::string &param) 
+    : adsr(SamplingRate, param) {
+      bActive = false;
+      x.resize(BSIZE);
 
-*Nota:* Ficheros usados para este ejercicio:
+      KeyValue kv(param);
+
+      std::string file_name;
+      static string kv_null;
+      if ((file_name = kv("file")) == kv_null) {
+        cerr << "Error: no se ha encontrado el campo con el fichero de la señal para un instrumento FicTabla" << endl;
+        throw -1;
+      }
+    
+      unsigned int fm;
+      if (readwav_mono(file_name, fm, tbl) < 0) {
+        cerr << "Error: no se puede leer el fichero " << file_name << " para un instrumento FicTabla" << endl;
+        throw -1;
+      }
+
+      N = tbl.size();
+    }
+  ```
+
+  Comparación de los ficheros doremi, arriba generado con el instrumento Seno, abajo con el instrumento
+  FicTable y el fichero [pulse.wav](work/pulse.wav)
+
+  ![Table comparison](img/table-comparison.png)
+
+*Nota:* Ficheros generados/usados para este ejercicio:
 -   [Instrumentos (.orc)](work/seno.orc)
 -   [Partitura (.sco)](work/doremi.sco)
--   [Audio (.wav)](work/doremi.wav)
+-   [Audio DoReMi (.wav)](work/doremi.wav)
+-   [Pulso (.orc)](work/pulse.orc)
+-   [Pulso (.wav)](work/pulse.wav)
+-   [Audio DoReMi con pulso (.wav)](work/doremi-pulse.wav)
 -   [Generar gráfica](scripts/plot-interpolation.py)
+-   [Generar pulso](scripts/genpulse.py)
 
 ### Efectos sonoros.
 
