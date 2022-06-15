@@ -75,9 +75,9 @@ colocar etiquetas y títulos adecuados en la propia gráfica (se valorará posit
 
 
 *Nota:* Ficheros generados para este ejercicio:
--   [Instrumentos (.orc)](work/adsr.orc)
--   [Partitura (.sco)](work/adsr.sco)
--   [Audio (.wav)](work/adsr.wav)
+-   [Instrumentos (.orc)](work/instruments/adsr.orc)
+-   [Partitura (.sco)](work/scores/adsr.sco)
+-   [Audio (.wav)](work/music/adsr.wav)
 
 ### Instrumentos Dumb y Seno.
 
@@ -252,12 +252,12 @@ mediante búsqueda de los valores en una tabla.
   ![Table comparison](img/table-comparison.png)
 
 *Nota:* Ficheros generados/usados para este ejercicio:
--   [Instrumentos (.orc)](work/seno.orc)
--   [Partitura (.sco)](work/doremi.sco)
--   [Audio DoReMi (.wav)](work/doremi.wav)
--   [Pulso (.orc)](work/pulse.orc)
--   [Pulso (.wav)](work/pulse.wav)
--   [Audio DoReMi con pulso (.wav)](work/doremi-pulse.wav)
+-   [Instrumentos (.orc)](work/instruments/seno.orc)
+-   [Partitura (.sco)](work/scores/doremi.sco)
+-   [Audio DoReMi (.wav)](work/music/doremi.wav)
+-   [Pulso (.orc)](work/instruments/pulse.orc)
+-   [Pulso (.wav)](work/samples/pulse.wav)
+-   [Audio DoReMi con pulso (.wav)](work/doremi-music/doremi-pulse.wav)
 -   [Generar gráfica](scripts/plot-interpolation.py)
 -   [Generar pulso](scripts/genpulse.py)
 
