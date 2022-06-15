@@ -267,10 +267,51 @@ mediante búsqueda de los valores en una tabla.
   sinusoidal. Deberá explicar detalladamente cómo se manifiestan los parámetros del efecto (frecuencia e
   índice de modulación) en la señal generada (se valorará que la explicación esté contenida en las propias
   gráficas, sin necesidad de *literatura*).
+
+  Se han usado parametros un poco *bruscos* para que se vean mejor los efectos. Con valores mucho mas
+  pequeños los efectos se oyen pero es mas dificil verlo en las gráficas (sobre todo en el vibrato).
+
+  #### Tremolo
+  ![Tremolo](img/effect-tremolo.png)
+
+  Parametros:
+  ```text
+  13  Tremolo A=0.25;  fm=8;
+  ```
+
+  Para generar el `WAVE`:
+  ```bash
+  synth --effect-file=work/effects/tremolo.orc work/instruments/seno.orc work/scores/doremi-effects.sco work/music/doremi-tremolo.wav
+  ```
+
+  #### Vibrato
+  ![Vibrato](img/effect-vibrato.png)
+
+  Parametros:
+  ```text
+  13  Vibrato fm=4;  I=12;
+  ```
+
+  Para generar el `WAVE`:
+  ```bash
+  synth --effect-file=work/effects/vibrato.orc work/instruments/seno.orc work/scores/doremi-effects.sco work/music/doremi-vibrato.wav
+  ```
+
 - Si ha generado algún efecto por su cuenta, explique en qué consiste, cómo lo ha implementado y qué
   resultado ha producido. Incluya, en el directorio `work/ejemplos`, los ficheros necesarios para apreciar
   el efecto, e indique, a continuación, la orden necesaria para generar los ficheros de audio usando el
   programa `synth`.
+
+  **TODO**
+
+*Nota:* Ficheros generados/usados para este ejercicio:
+-   [Instrumentos (.orc)](work/instruments/seno.orc)
+-   [Efecto tremolo (.orc)](work/effects/tremolo.orc)
+-   [Efecto vibrato (.orc)](work/effects/vibrato.orc)
+-   [Partitura (.sco)](work/scores/doremi-effects.sco)
+-   [Audio DoReMi tremolo (.wav)](work/music/doremi-tremolo.wav)
+-   [Audio DoReMi vibrato (.wav)](work/music/doremi-vibrato.wav)
+-   [Generar graficas](scripts/plot-effect.py)
 
 ### Síntesis FM.
 
