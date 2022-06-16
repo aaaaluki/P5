@@ -2,6 +2,7 @@
 #include "instrument_dumb.h"
 #include "seno.h"
 #include "fictabla.h"
+#include "synthfm.h"
 
 /*
   For each new instrument:
@@ -23,6 +24,8 @@ namespace upc {
       pInst = (Instrument *) new Seno(parameters);
     } else if (name == "FicTabla") {
       pInst = (Instrument *) new FicTabla(parameters);
+    } else if (name == "SynthFM") {
+      pInst = (Instrument *) new SynthFM(parameters);
     }
     return pInst;
   }

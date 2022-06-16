@@ -256,8 +256,8 @@ mediante búsqueda de los valores en una tabla.
 -   [Pulso (.orc)](work/instruments/pulse.orc)
 -   [Pulso (.wav)](work/samples/pulse.wav)
 -   [Audio DoReMi con pulso (.wav)](work/doremi-music/doremi-pulse.wav)
--   [Generar gráfica](scripts/plot-interpolation.py)
--   [Generar pulso](scripts/genpulse.py)
+-   [Generar gráfica (.py)](scripts/plot-interpolation.py)
+-   [Generar pulso (.py)](scripts/genpulse.py)
 
 ### Efectos sonoros.
 
@@ -309,7 +309,7 @@ mediante búsqueda de los valores en una tabla.
 -   [Partitura (.sco)](work/scores/doremi-effects.sco)
 -   [Audio DoReMi tremolo (.wav)](work/music/doremi-tremolo.wav)
 -   [Audio DoReMi vibrato (.wav)](work/music/doremi-vibrato.wav)
--   [Generar graficas](scripts/plot-effect.py)
+-   [Generar graficas (.py)](scripts/plot-effect.py)
 
 ### Síntesis FM.
 
@@ -320,10 +320,16 @@ deberá venir expresado en semitonos.
 
 - Use el instrumento para generar un vibrato de *parámetros razonables* e incluya una gráfica en la que se
   vea, claramente, la correspondencia entre los valores `N1`, `N2` e `I` con la señal obtenida.
+
+  **TODO**
+
 - Use el instrumento para generar un sonido tipo clarinete y otro tipo campana. Tome los parámetros del
   sonido (N1, N2 e I) y de la envolvente ADSR del citado artículo. Con estos sonidos, genere sendas escalas
   diatónicas (fichero `doremi.sco`) y ponga el resultado en los ficheros `work/doremi/clarinete.wav` y
   `work/doremi/campana.work`.
+
+  **TODO**
+
   * También puede colgar en el directorio work/doremi otras escalas usando sonidos *interesantes*. Por
     ejemplo, violines, pianos, percusiones, espadas láser de la
 	[Guerra de las Galaxias](https://www.starwars.com/), etc.
