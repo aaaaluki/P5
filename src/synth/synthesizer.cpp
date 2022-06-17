@@ -7,6 +7,7 @@ using namespace std;
 using namespace upc;
 
 const int PRINT_SCORE = 1;
+const int PRINT_WAVEFORM = 1;
 
 void warn_unregistered_instruments(const vector<MidiMsg> &score, 
 				   const Orchest &orchest, ostream &os);
@@ -25,6 +26,7 @@ Options:
     -t FLOAT, --tpb=FLOAT      Ticks per beat: must match input score  [default: 120]
     -g FLOAT, --gain=FLOAT     Gain applied to the output waveform [default: 0.5]
     -e STR, --effect-file=STR  Text file with the definition of the effects
+    -p, --print                Outputs the waveform as floats
     -v, --verbose              Show the score on screen as it is played
     -h, --help                 Show this screen
     --version                  Show the version of the project
@@ -51,6 +53,7 @@ int main(int argc, const char **argv) {
   const char *output_wav = args["<output-wav>"].asString().c_str();
 
   int verbose = (args["--verbose"].asBool() ? PRINT_SCORE : 0);
+  int print = (args["--print"].asBool() ? PRINT_WAVEFORM : 0);
 
   float bpm = stof(args["--bpm"].asString());
   float tpb = stof(args["--tpb"].asString());
@@ -123,6 +126,12 @@ int main(int argc, const char **argv) {
       //cout << "synth:\t" << t << '\t' << t_score << endl;
 
       const vector<float> &xt = orchest.synthesize();
+      if (print) {
+        for (unsigned int i = 0; i < xt.size(); i++) {
+          printf("%.6f\n", xt[i]);
+        }
+      }
+
       if (BSIZE !=  sf_writef_float(soundFile, xt.data(), BSIZE)) {
 	      cerr << "Error writting file " << output_wav << endl;
 	      return -2;
