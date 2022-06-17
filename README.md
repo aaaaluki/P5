@@ -321,18 +321,52 @@ deberá venir expresado en semitonos.
 - Use el instrumento para generar un vibrato de *parámetros razonables* e incluya una gráfica en la que se
   vea, claramente, la correspondencia entre los valores `N1`, `N2` e `I` con la señal obtenida.
 
-  **TODO**
-
+  **TODO: Insertar uns FFT**
+  
 - Use el instrumento para generar un sonido tipo clarinete y otro tipo campana. Tome los parámetros del
   sonido (N1, N2 e I) y de la envolvente ADSR del citado artículo. Con estos sonidos, genere sendas escalas
   diatónicas (fichero `doremi.sco`) y ponga el resultado en los ficheros `work/doremi/clarinete.wav` y
-  `work/doremi/campana.work`.
+  `work/doremi/campana.wav`.
 
-  **TODO**
+  #### Clarinete
+
+  ![Clarinete](img/instrument-clarinete.png)
+
+  Parametros:
+  ```text
+  1   SynthFM ADSR_A=0.10; ADSR_D=0.00; ADSR_S=1.00; ADSR_R=0.05; I=4.0; N1=3.0; N2=2.0;
+  ```
+
+  Commando:
+  ```bash
+  synth work/instruments/clarinete.orc work/scores/doremi.sco work/doremi/clarinete.wav
+  ```
+
+  #### Campana
+
+  ![Campana](img/instrument-campana.png)
+
+  Parametros:
+  ```text
+  1   SynthFM ADSR_A=0.01; ADSR_D=0.50; ADSR_S=0.00; ADSR_R=0.00; I=10.0; N1=1.0; N2=1.6;
+  ```
+
+  Commando:
+  ```bash
+  synth work/instruments/campana.orc work/scores/doremi.sco work/doremi/campana.wav
+  ```
 
   * También puede colgar en el directorio work/doremi otras escalas usando sonidos *interesantes*. Por
     ejemplo, violines, pianos, percusiones, espadas láser de la
 	[Guerra de las Galaxias](https://www.starwars.com/), etc.
+
+*Nota:* Ficheros generados/usados para este ejercicio:
+-   [Clarinete (.orc)](work/instruments/clarinete.orc)
+-   [Campana (.orc)](work/instruments/campana.orc)
+-   [DoReMi (.sco)](work/scores/doremi.sco)
+-   [Audio Clarinete (.wav)](work/doremi/clarinete.wav)
+-   [Audio Campana (.wav)](work/doremi/campana.wav)
+-   [Generar graficas (.py)](scripts/plot-instrument.py)
 
 ### Orquestación usando el programa synth.
 

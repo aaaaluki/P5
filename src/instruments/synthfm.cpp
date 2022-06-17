@@ -25,6 +25,7 @@ SynthFM::SynthFM(const std::string &param)
   I = 1.0f - pow(2.0f, -I / 12.0f);
 
   if (!kv.to_float("N1", N1)) {
+    // N1 = c
     N1 = 8.0f; //default value
   }
   if (N1 == 0.0f) {
@@ -34,6 +35,7 @@ SynthFM::SynthFM(const std::string &param)
   }
 
   if (!kv.to_float("N2", N2)) {
+    // N2 = m
     N2 = 4.0f; //default value
   }
 
