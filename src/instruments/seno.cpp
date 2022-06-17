@@ -69,21 +69,13 @@ const vector<float> & Seno::synthesize() {
   int il, ir;
 
   for (unsigned int i = 0; i < x.size(); ++i, index += delta_idx) {
-    // Check out of bounds
-    if (index > (float)tbl.size()) {
-        index -= (float) tbl.size();
-    }
+    // It's like the modulus operator but with floats
+    while (index > (float)tbl.size()) { index -= (float)tbl.size();}
 
     // Get base and fraction indices
     il = (int)floor(index);
     frac = index - (float)il;
-
-    // See if left index is last sample or not
-    ir = il + 1;
-    if (il == (int)tbl.size() - 1) {
-      ir = 0;
-      index -= tbl.size();
-    }
+    ir = il == N-1 ? 0 : il + 1;
 
     // Lerp
     x[i] = A * ((1-frac)*tbl[il] + frac*tbl[ir]);

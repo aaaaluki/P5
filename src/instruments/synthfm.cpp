@@ -5,7 +5,6 @@
 
 #include <stdlib.h>
 
-// #define USE_INTERPOLATION
 
 using namespace upc;
 using namespace std;
@@ -41,10 +40,11 @@ SynthFM::SynthFM(const std::string &param)
 
   // Create a tbl with one period of a sinusoidal wave
   // Just using it as a LUT, frequency does not matter (the most samples the better tough)
+  scaling_const = 2 * M_PI / (float)N;
   tbl.resize(N);
   phase_c = 0.0f;
   phase_m = 0.0f;
-  float phase = 0, step = 2 * M_PI /(float) N;
+  float phase = 0, step = scaling_const;
 
   for (int i=0; i < N ; ++i) {
     tbl[i] = sin(phase);
@@ -90,7 +90,7 @@ const vector<float> & SynthFM::synthesize() {
     return x;
   }
 
-  #ifdef USE_INTERPOLATION
+  #if USE_INTERPOLATION == 1
   float frac;
   int il, ir;
   float inner_phase;
@@ -98,28 +98,42 @@ const vector<float> & SynthFM::synthesize() {
 
   for (unsigned int i = 0; i < x.size(); ++i, phase_c += delta_phase_c, phase_m += delta_phase_m) {
     // "Clamp" phases between 0 and N
-    while (phase_c > (float)tbl.size()) { phase_c -= (float)tbl.size();}
-    while (phase_m > (float)tbl.size()) { phase_m -= (float)tbl.size();}
+    // It's like the modulus operator but with floats
+    while (phase_c > (float)tbl.size()) { phase_c -= (float)tbl.size(); }
+    while (phase_m > (float)tbl.size()) { phase_m -= (float)tbl.size(); }
 
-    #ifdef USE_INTERPOLATION
+    #if USE_INTERPOLATION == 1
     // Value for inside sine
     il = (int)floor(phase_m);
     frac = phase_m - (float)il;
-    ir = il + 1 >= N ? 0 : il + 1;
+    ir = il == N-1 ? 0 : il + 1;
     
-    // Lerp
-    inner_phase = phase_c + I * ((1-frac)*tbl[il] + frac*tbl[ir]);
+    // Lerp phase
+    inner_phase = phase_c + (I / scaling_const) * ((1-frac)*tbl[il] + frac*tbl[ir]);
+    while (inner_phase > (float)tbl.size()) { inner_phase -= (float)tbl.size(); }
+    while (inner_phase < 0) { inner_phase += (float)tbl.size(); }
+    // "FUN FACT": pot ser que inner_phase sigui negatiu si:
+    //  - es fa servir una I molt gran,
+    //  - el sinus que modula la freqüència és negatiu
+    //  - phase_c es bastant petit
+    //
+    // Com només es comprobava per index massa grans (> N) hi havien glitchs en el audio
+    // per index negatius, que posaven el senyal a 0 en alguns trams.
+    //
+    // Ha costat bastant trobar de que es tractava, pero ja esta :^)
+    // me: chr(0x41)*41
+    // 
 
     // Value for outter sine
     il = (int)floor(inner_phase);
     frac = inner_phase - (float)il;
-    ir = il + 1 >= N ? 0 : il + 1;
+    ir = il >= N-1 ? 0 : il + 1;
 
-    // Lerp
+    // Lerp final
     x[i] = A * ((1-frac)*tbl[il] + frac*tbl[ir]);
 
     #else
-    x[i] = A*sin(2*M_PI*phase_c/N + I*sin(2*M_PI*phase_m/N));
+    x[i] = A * sin(2*M_PI*phase_c/N + I*sin(2*M_PI*phase_m/N));
     #endif
   }
 
