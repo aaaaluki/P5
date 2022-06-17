@@ -1,4 +1,5 @@
 #include <iostream>
+#include "distortion.h"
 #include "tremolo.h"
 #include "vibrato.h"
 
@@ -15,12 +16,14 @@ namespace upc {
   Effect *get_effect(const string &name, const string &parameters) {
     Effect *pEffect = 0;
     //    cout << name << ": " << parameters << endl;
-    if (name == "Tremolo") {
+    if (name == "Distortion") {
+      pEffect = (Effect *) new Distortion(parameters);
+    } else if (name == "Tremolo") {
       pEffect = (Effect *) new Tremolo(parameters);
-    }
-	else if (name == "Vibrato") {
+    } else if (name == "Vibrato") {
       pEffect = (Effect *) new Vibrato(parameters);
     }
+    
     return pEffect;
   }
 }

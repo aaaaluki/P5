@@ -2,6 +2,7 @@
 
 sources = [
     'effects/effect.cpp',
+    'effects/distortion.cpp',
     'effects/tremolo.cpp',
     'effects/vibrato.cpp',
     'instruments/fictabla.cpp',
