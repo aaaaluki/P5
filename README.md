@@ -300,7 +300,39 @@ mediante búsqueda de los valores en una tabla.
   el efecto, e indique, a continuación, la orden necesaria para generar los ficheros de audio usando el
   programa `synth`.
 
-  **TODO**
+  Se ha implementado la distorsión con hard y soft clipping, este se puede seleccionar con el parametro
+  `clipping` en los ficheros `<effect>.orc`.
+
+  #### Distortion (Hard clipping)
+  ![Distortion Hard](img/effect-distortion-hard.png)
+
+  Para el hard clipping simplemente es hacer un `clamp` de la señal entre `-threshold` y `+threshold`.
+  Posteriormente se le puede aplicar una ganancia `A`.
+
+  Parametros:
+  ```text
+  13  Distortion  threshold=0.2; A=4.0; clipping=hard;
+  ```
+
+  Para generar el `WAVE`:
+  ```bash
+  synth --effect-file=work/effects/distortion.orc work/instruments/seno.orc work/scores/doremi-low-effects.sco work/music/doremi-distortion-hard.wav
+  ```
+  #### Distortion (Soft clipping)
+  ![Distortion Soft](img/effect-distortion-soft.png)
+
+  Para el soft clipping primero se aplica el hard clipping y luego se le aplica un
+  [smoothstep](https://en.wikipedia.org/wiki/Smoothstep) a la señal para suavizar las transiciones.
+
+  Parametros:
+  ```text
+  13  Distortion  threshold=0.2; A=4.0; clipping=soft;
+  ```
+
+  Para generar el `WAVE`:
+  ```bash
+  synth --effect-file=work/effects/distortion.orc work/instruments/seno.orc work/scores/doremi-low-effects.sco work/music/doremi-distortion-soft.wav
+  ```
 
 *Nota:* Ficheros generados/usados para este ejercicio:
 -   [Instrumentos (.orc)](work/instruments/seno.orc)
