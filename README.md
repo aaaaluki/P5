@@ -247,17 +247,27 @@ mediante búsqueda de los valores en una tabla.
   Comparación de los ficheros doremi, arriba generado con el instrumento Seno, abajo con el instrumento
   FicTable y el fichero [pulse.wav](work/pulse.wav)
 
-  ![Table comparison](img/table-comparison.png)
+  ![Table comparison](img/compare-doremi-seno-vs-doremi-pulse.png)
+  *Comparación hecha a bajas frecuencias para apreciar mejor las formas de onda.*
 
 *Nota:* Ficheros generados/usados para este ejercicio:
 -   [Instrumentos (.orc)](work/instruments/seno.orc)
 -   [Partitura (.sco)](work/scores/doremi.sco)
 -   [Audio DoReMi (.wav)](work/music/doremi.wav)
--   [Pulso (.orc)](work/instruments/pulse.orc)
--   [Pulso (.wav)](work/samples/pulse.wav)
+-   [Pulse (.orc)](work/instruments/pulse.orc)
+-   [Pulse (.wav)](work/samples/pulse.wav)
+-   [Sawtooth (.orc)](work/instruments/sawtooth.orc)
+-   [Sawtooth (.wav)](work/samples/sawtooth.wav)
+-   [Sine (.orc)](work/instruments/sine.orc)
+-   [Sine (.wav)](work/samples/sine.wav)
+-   [Triangle (.orc)](work/instruments/triangle.orc)
+-   [Triangle (.wav)](work/samples/triangle.wav)
+-   [White Noise (.orc)](work/instruments/white-noise.orc)
+-   [White Noise (.wav)](work/samples/white-noise.wav)
 -   [Audio DoReMi con pulso (.wav)](work/doremi-music/doremi-pulse.wav)
--   [Generar gráfica (.py)](scripts/plot-interpolation.py)
--   [Generar pulso (.py)](scripts/genpulse.py)
+-   [Generar gráfica interpolación (.py)](scripts/plot-interpolation.py)
+-   [Generar gráfica comparación (.py)](scripts/plot-comparison.py)
+-   [Generar pulsos (.py)](scripts/genpulses.py)
 
 ### Efectos sonoros.
 
@@ -333,6 +343,9 @@ mediante búsqueda de los valores en una tabla.
   ```bash
   synth --effect-file=work/effects/distortion.orc work/instruments/seno.orc work/scores/doremi-low-effects.sco work/music/doremi-distortion-soft.wav
   ```
+
+  Comparación de ambas distorsiones:
+  ![Distortions comparison](img/compare-doremi-distortion-hard-vs-doremi-distortion-soft.png)
 
 *Nota:* Ficheros generados/usados para este ejercicio:
 -   [Instrumentos (.orc)](work/instruments/seno.orc)
