@@ -54,7 +54,7 @@ ax1.set_xlabel('Time [s]')
 ax1.grid()
 
 ax2.semilogx(f, data_fft, linewidth=lwidth)
-ax2.set_xlim(1, sampling_freq/2)
+ax2.set_xlim(10, sampling_freq/2)
 ax2.set_xlabel('Frequency [Hz]')
 ax2.grid()
 
