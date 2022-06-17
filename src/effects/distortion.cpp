@@ -41,7 +41,7 @@ void Distortion::operator()(std::vector<float> &x){
   
   for (unsigned int i = 0; i < x.size(); i++) {
     // Uncomment to get data for plotting
-    printf("%.5f\t", x[i]);
+    //printf("%.5f\t", x[i]);
 
     x[i] /= threshold;
 
@@ -60,7 +60,7 @@ void Distortion::operator()(std::vector<float> &x){
 
     x[i] *= A*threshold;
 
-    printf("%.5f\n", x[i]);
+    //printf("%.5f\n", x[i]);
   }
 }
 
