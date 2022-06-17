@@ -33,14 +33,17 @@ ir = int(SAMPLING_FREQ*0.6)
 lwidth = 1.0
 
 fig, (ax1, ax2) = plt.subplots(2, 1)
-ax1.plot(t[il:ir], data_orig[il:ir], linewidth=lwidth, c='blue', label='Original')
-ax2.plot(t[il:ir], data_effe[il:ir], linewidth=lwidth, c='green', label=effect_name)
-
 fig.suptitle(f'Effect: {effect_name}')
-ax2.set_xlabel('Time [s]')
+
+ax1.plot(t[il:ir], data_orig[il:ir], linewidth=lwidth, c='blue', label='Original')
+ax1.set_ylim(-1, 1)
 ax1.set_ylabel('Original')
-ax2.set_ylabel(effect_name)
 ax1.grid()
+
+ax2.plot(t[il:ir], data_effe[il:ir], linewidth=lwidth, c='green', label=effect_name)
+ax2.set_ylim(-1, 1)
+ax2.set_xlabel('Time [s]')
+ax2.set_ylabel(effect_name)
 ax2.grid()
 
 plt.savefig(f'{WORKDIR}/img/effect-{effect_name}.png', dpi=200)
