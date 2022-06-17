@@ -11,7 +11,7 @@ namespace upc {
     EnvelopeADSR adsr;
     float index;
     float delta_idx;
-	float A;
+  	float A;
     int N;
     std::vector<float> tbl;
   public:

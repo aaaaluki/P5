@@ -6,6 +6,8 @@
 #include "instrument.h"
 #include "envelope_adsr.h"
 
+const int N = 128;
+
 namespace upc {
   class SynthFM: public upc::Instrument {
     EnvelopeADSR adsr;
@@ -13,6 +15,7 @@ namespace upc {
     float I, N1, N2;
     float fc, phase_c, delta_phase_c;
     float fm, phase_m, delta_phase_m;
+    std::vector<float> tbl;
   public:
     SynthFM(const std::string &param = "");
     void command(long cmd, long note, long velocity=1); 

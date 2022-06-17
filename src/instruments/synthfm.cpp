@@ -5,6 +5,8 @@
 
 #include <stdlib.h>
 
+// #define USE_INTERPOLATION
+
 using namespace upc;
 using namespace std;
 
@@ -34,6 +36,18 @@ SynthFM::SynthFM(const std::string &param)
   if (!kv.to_float("N2", N2)) {
     N2 = 4.0f; //default value
   }
+
+  // Create a tbl with one period of a sinusoidal wave
+  // Just using it as a LUT, frequency does not matter (the most samples the better tough)
+  tbl.resize(N);
+  phase_c = 0.0f;
+  phase_m = 0.0f;
+  float phase = 0, step = 2 * M_PI /(float) N;
+
+  for (int i=0; i < N ; ++i) {
+    tbl[i] = sin(phase);
+    phase += step;
+  }
 }
 
 
@@ -49,13 +63,11 @@ void SynthFM::command(long cmd, long note, long vel) {
     
     // Carrier thingiys
     fc = 440 * powf(2, (note - 69.0f) / 12.0f);
-    phase_c = 0.0f;
-    delta_phase_c = 2 * M_PI * (fc / SamplingRate);
+    delta_phase_c = N * (fc / SamplingRate);
 
     // MoDuLaTiOn StUfF
     fm = (fc*N2) / N1;
-    phase_m = 0.0f;
-    delta_phase_m = 2 * M_PI * (fm / SamplingRate);
+    delta_phase_m = N * (fm / SamplingRate);
 
   } else if (cmd == 8) {	//'Key' released: sustain ends, release begins
     adsr.stop();
@@ -76,16 +88,37 @@ const vector<float> & SynthFM::synthesize() {
     return x;
   }
 
+  #ifdef USE_INTERPOLATION
+  float frac;
+  int il, ir;
+  float inner_phase;
+  #endif
+
   for (unsigned int i = 0; i < x.size(); ++i, phase_c += delta_phase_c, phase_m += delta_phase_m) {
-    // TODO: take the phase of the outter sin and use it as an index for a LUT (interpolation needed)
-    // Probably could do the same for the inner sin, idk
+    // "Clamp" phases between 0 and N
+    while (phase_c > (float)tbl.size()) { phase_c -= (float)tbl.size();}
+    while (phase_m > (float)tbl.size()) { phase_m -= (float)tbl.size();}
 
-    // This is a "temporary" POC
-    x[i] = A*sin(phase_c + I*sin(phase_m));
+    #ifdef USE_INTERPOLATION
+    // Value for inside sine
+    il = (int)floor(phase_m);
+    frac = phase_m - (float)il;
+    ir = il + 1 >= N ? 0 : il + 1;
+    
+    // Lerp
+    inner_phase = phase_c + I * ((1-frac)*tbl[il] + frac*tbl[ir]);
 
-    // "Clamp" phases between -PI and PI
-    while (phase_c > M_PI) { phase_c -= 2*M_PI;}
-    while (phase_m > M_PI) { phase_m -= 2*M_PI;}
+    // Value for outter sine
+    il = (int)floor(inner_phase);
+    frac = inner_phase - (float)il;
+    ir = il + 1 >= N ? 0 : il + 1;
+
+    // Lerp
+    x[i] = A * ((1-frac)*tbl[il] + frac*tbl[ir]);
+
+    #else
+    x[i] = A*sin(2*M_PI*phase_c/N + I*sin(2*M_PI*phase_m/N));
+    #endif
   }
 
   //apply envelope to x and update internal status of ADSR
