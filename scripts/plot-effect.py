@@ -46,5 +46,7 @@ ax2.set_xlabel('Time [s]')
 ax2.set_ylabel(effect_name)
 ax2.grid()
 
-plt.savefig(f'{WORKDIR}/img/effect-{effect_name}.png', dpi=200)
+savefile = f'{WORKDIR}/img/effect-{effect_name}.png'
+print(f'Saving plot as: {savefile}')
+plt.savefig(savefile, dpi=PLOT_DPI)
 plt.show()

@@ -66,5 +66,5 @@ ax2.grid()
 
 savefile = f'{WORKDIR}/img/compare-{fname1}-vs-{fname2}.png'
 print(f'Saving plot as: {savefile}')
-plt.savefig(savefile, dpi=200)
+plt.savefig(savefile, dpi=PLOT_DPI)
 plt.show()

@@ -33,6 +33,8 @@ plt.ylabel('Amplitude')
 plt.grid()
 
 plt.legend()
-plt.savefig(f'{WORKDIR}/img/table-interpolation.png', dpi=200)
+savefile = f'{WORKDIR}/img/table-interpolation.png'
+print(f'Saving plot as: {savefile}')
+plt.savefig(savefile, dpi=PLOT_DPI)
 plt.show()
 

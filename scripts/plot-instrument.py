@@ -58,5 +58,7 @@ ax2.set_xlim(10, sampling_freq/2)
 ax2.set_xlabel('Frequency [Hz]')
 ax2.grid()
 
-plt.savefig(f'{WORKDIR}/img/instrument-{instrument}.png', dpi=PLOT_DPI)
+savefile = f'{WORKDIR}/img/instrument-{instrument}.png'
+print(f'Saving plot as: {savefile}')
+plt.savefig(savefile, dpi=PLOT_DPI)
 plt.show()

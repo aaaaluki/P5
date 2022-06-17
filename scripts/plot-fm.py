@@ -50,5 +50,7 @@ plt.grid()
 plt.title('Comparison of FM synthesis spectrums')
 plt.legend(loc='lower left')
 
-plt.savefig(f'{WORKDIR}/img/fm-comparison.png', dpi=PLOT_DPI)
+savefile = f'{WORKDIR}/img/fm-comparison.png'
+print(f'Saving plot as: {savefile}')
+plt.savefig(savefile, dpi=PLOT_DPI)
 plt.show()
