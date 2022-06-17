@@ -321,7 +321,18 @@ deberá venir expresado en semitonos.
 - Use el instrumento para generar un vibrato de *parámetros razonables* e incluya una gráfica en la que se
   vea, claramente, la correspondencia entre los valores `N1`, `N2` e `I` con la señal obtenida.
 
-  **TODO: Insertar uns FFT**
+  Comparando la Figura 1 del artículo de Chowning *(insertada abajo)* con la gráfica generada por mi se
+  pueden ver similitudes. A partir de la posición de los picos se pueden obtener `fc` y `fm`, y con
+  estimar `N1` y `N2`. También se aprecia que a mayor `I` mayores son los picos.
+
+  ![Chowning Art. Figure 1](img/chowning-fig1.png)
+
+  ![FM FFT comparison](img/fm-comparison.png)
+
+  **TODO: hacer que el script detecte los picos para encontrar fc y fm (para comparar con params), luego
+  esimar los parametros e insertarlos en algun lugar de este apartado**
+
+  *Solo se esta mostrando la parte 'interesante' del espectro para apreciar mas los detalles.*
   
 - Use el instrumento para generar un sonido tipo clarinete y otro tipo campana. Tome los parámetros del
   sonido (N1, N2 e I) y de la envolvente ADSR del citado artículo. Con estos sonidos, genere sendas escalas
@@ -361,12 +372,15 @@ deberá venir expresado en semitonos.
 	[Guerra de las Galaxias](https://www.starwars.com/), etc.
 
 *Nota:* Ficheros generados/usados para este ejercicio:
+-   [SynthFM Genérico (.orc)](work/instruments/synthfm.orc)
 -   [Clarinete (.orc)](work/instruments/clarinete.orc)
 -   [Campana (.orc)](work/instruments/campana.orc)
 -   [DoReMi (.sco)](work/scores/doremi.sco)
+-   [Audio SynthFM Genérico (.wav)](work/doremi/doremi-synthfm.wav)
 -   [Audio Clarinete (.wav)](work/doremi/clarinete.wav)
 -   [Audio Campana (.wav)](work/doremi/campana.wav)
--   [Generar graficas (.py)](scripts/plot-instrument.py)
+-   [Generar graficas FM Synth (.py)](scripts/plot-fm.py)
+-   [Generar graficas instrumentos (.py)](scripts/plot-instrument.py)
 
 ### Orquestación usando el programa synth.
 
