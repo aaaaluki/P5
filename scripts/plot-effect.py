@@ -5,10 +5,7 @@ import sys
 import matplotlib.pyplot as plt
 import numpy as np
 
-
-WORKDIR = os.path.expanduser('~/PAV/P5')
-SAMPLING_FREQ = 44100
-
+from config import *
 
 # Some arg parsing and error checking
 if len(sys.argv) < 2:

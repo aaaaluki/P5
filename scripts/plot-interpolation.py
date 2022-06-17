@@ -4,8 +4,7 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 
-WORKDIR = os.path.expanduser('~/PAV/P5')
-SAMPLING_FREQ = 44100
+from config import *
 
 
 data = np.loadtxt(f'{WORKDIR}/work/graphs/interpolation-data.txt')

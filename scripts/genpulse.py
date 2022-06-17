@@ -1,13 +1,11 @@
 #!/usr/bin/env python3 -u
-import os
-
-import matplotlib.pyplot as plt
 import numpy as np
 import scipy.io.wavfile as wavf
 
-WORKDIR = os.path.expanduser('~/PAV/P5')
-SAMPLING_FREQ = 44100
-OUT_FILE = f'{WORKDIR}/work/pulse.wav'
+from config import *
+
+
+OUT_FILE = f'{WORKDIR}/work/samples/pulse.wav'
 N = 64
 DUTY_CYCLE = 0.5
 C = 1
