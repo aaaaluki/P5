@@ -445,6 +445,16 @@ Use el programa `synth` para generar canciones a partir de su partitura MIDI. Co
 - Indique, a continuación, la orden necesaria para generar la señal (suponiendo que todos los archivos
   necesarios están en directorio indicado).
 
+#### Toy Story
+
+![Route 1](img/toy-story.gif)
+
+Comando a ejecutar:
+```bash
+synth -g 0.2 work/music/ToyStory_A_Friend_in_me.orc work/music/ToyStory_A_Friend_in_me.sco work/music/ToyStory_A_Friend_in_me.wav
+```
+Fichero resultante: [ToyStory_A_Friend_in_me.wav](work/music/ToyStory_A_Friend_in_me.wav)
+
 También puede orquestar otros temas más complejos, como la banda sonora de *Hawaii5-0* o el villacinco de
 John Lennon *Happy Xmas (War Is Over)* (fichero `The_Christmas_Song_Lennon.sco`), o cualquier otra canción
 de su agrado o composición. Se valorará la riqueza instrumental, su modelado y el resultado final.
