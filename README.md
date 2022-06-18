@@ -462,3 +462,39 @@ de su agrado o composición. Se valorará la riqueza instrumental, su modelado y
   `work/music`.
 - Indique, a continuación, la orden necesaria para generar cada una de las señales usando los distintos
   ficheros.
+
+#### Route 1
+
+Banda sonora de la ruta 1 de los juegos Pokemon Rojo/Azul/Amarillo para GameBoy.
+
+![Route 1](img/route1.gif)
+
+Comando a ejecutar:
+```bash
+synth -g 0.2 work/music/route1.orc work/music/route1.sco work/music/route1.wav
+```
+Fichero resultante: [route1.wav](work/music/route1.wav)
+
+#### Mario
+
+Banda sonora del juego Super Mario Bros.
+
+![Route 1](img/mario.gif)
+
+Comando a ejecutar:
+```bash
+synth -g 0.2 work/music/mario.orc work/music/mario.sco work/music/mario.wav
+```
+Fichero resultante: [mario.wav](work/music/mario.wav)
+
+#### Rick
+
+Una canción de Rick Astley.
+
+![Route 1](img/rick.gif)
+
+Comando a ejecutar:
+```bash
+synth -g 0.2 work/music/rick.orc work/music/rick.sco work/music/rick.wav
+```
+Fichero resultante: [rick.wav](work/music/rick.wav)
