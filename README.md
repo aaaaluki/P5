@@ -25,6 +25,11 @@ permitan visualizar el funcionamiento de la curva ADSR.
 
 El fichero de los que contiene los instrumentos mostrados a continuación es [dumb.orc](work/dumb.orc).
 
+Las gráficas de los instrumentos con envolvente ADSR estan *bastante* inspiradas en la siguiente
+[imagen](https://blog.landr.com/wp-content/uploads/2016/10/ASDR-01.jpg):
+
+![Explicación ADSR](img/sample-graph-adsr.jpeg)
+
 * Un instrumento con una envolvente ADSR genérica, para el que se aprecie con claridad cada uno de sus
   parámetros: ataque (A), caída (D), mantenimiento (S) y liberación (R).
 
@@ -32,7 +37,7 @@ El fichero de los que contiene los instrumentos mostrados a continuación es [du
     # Generic ADSR
     1	InstrumentDumb	ADSR_A=0.20; ADSR_D=0.10; ADSR_S=0.20; ADSR_R=0.30; N=16;
     ```
-    ![Generic](img/generic-adsr.png)
+    ![Generic](img/adsr-generic-adsr.png)
 
 * Un instrumento *percusivo*, como una guitarra o un piano, en el que el sonido tenga un ataque rápido, no
   haya mantenimiemto y el sonido se apague lentamente.
@@ -43,7 +48,7 @@ El fichero de los que contiene los instrumentos mostrados a continuación es [du
     # Percusive 1 ADSR
     2	InstrumentDumb	ADSR_A=0.01; ADSR_D=0.20; ADSR_S=0.00; ADSR_R=0.00; N=127;
     ```
-    ![Percusive 1](img/percusive1-adsr.png)
+    ![Percusive 1](img/adsr-percusive-1-adsr.png)
 
 
     * El intérprete da por finalizada la nota antes de su completa extinción, iniciándose una disminución
@@ -53,7 +58,7 @@ El fichero de los que contiene los instrumentos mostrados a continuación es [du
     # Percusive 2 ADSR
     3	InstrumentDumb	ADSR_A=0.01; ADSR_D=0.20; ADSR_S=0.00; ADSR_R=0.01; N=127;
     ```
-    ![Percusive 2](img/percusive2-adsr.png)
+    ![Percusive 2](img/adsr-percusive-2-adsr.png)
 
   - Debera representar en esta memoria **ambos** posibles finales de la nota.
 
@@ -65,7 +70,7 @@ El fichero de los que contiene los instrumentos mostrados a continuación es [du
     # Plain ADSR
     4	InstrumentDumb	ADSR_A=0.05; ADSR_D=0.00; ADSR_S=0.40; ADSR_R=0.60; N=92;
     ```
-    ![Plain](img/plain-adsr.png)
+    ![Plain](img/adsr-plain-adsr.png)
 
 Para los cuatro casos, deberá incluir una gráfica en la que se visualice claramente la curva ADSR. Deberá
 añadir la información necesaria para su correcta interpretación, aunque esa información puede reducirse a
@@ -76,6 +81,7 @@ colocar etiquetas y títulos adecuados en la propia gráfica (se valorará posit
 -   [Instrumentos (.orc)](work/instruments/adsr.orc)
 -   [Partitura (.sco)](work/scores/adsr.sco)
 -   [Audio (.wav)](work/music/adsr.wav)
+-   [Generar ADSR (.py)](scripts/plot-adsr.py)
 
 ### Instrumentos Dumb y Seno.
 
