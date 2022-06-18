@@ -176,6 +176,7 @@ namespace upc {
 		}
 	    for (unsigned n = 0; n < xr.size(); ++n)
 	      xt[n] += xr[n];
+
 	    num_inst++;
 	    if (i->second->is_active())
 	      anyActive = true;
@@ -183,7 +184,7 @@ namespace upc {
     }
 
     for (unsigned n = 0; n < xt.size(); ++n)
-      xt[n] *= gain;
+      xt[n] *= gain / num_inst;
 
     return xt;
   }

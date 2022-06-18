@@ -2,7 +2,6 @@
 from collections import defaultdict
 import os
 import sys
-from pathlib import Path
 from typing import Tuple
 
 import matplotlib.pyplot as plt

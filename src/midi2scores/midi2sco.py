@@ -28,6 +28,8 @@ def midi2sco(ficMIDI, ficScore, beats_per_minute=120, ticks_per_beat=144):
         beats_per_minute = 120
         print(f'ATENCIÓN: no se ha encontrado el tempo. Usando el valor por defecto bpm={beats_per_minute}\n')
 
+    # Por si el ficheco no tiene bpm
+    tempo = beats_per_minute
     print(f"Usando bpm={tempo} pulsos por minuto y tpb={ticks_per_beat:.0f} ticks por pulso. Se recomienda")
     print(f"usar estos mismos valores al reproducir {ficScore} con el programa 'synth'.\n")
 
