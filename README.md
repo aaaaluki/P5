@@ -242,16 +242,31 @@ mediante búsqueda de los valores en una tabla.
     }
   ```
 
-  Comparación de los ficheros doremi, arriba generado con el instrumento Seno, abajo con el instrumento
-  FicTable y el fichero [pulse.wav](work/pulse.wav)
+  Comparación de los ficheros doremi, arriba generado con el instrumento Seno, abajo con los
+  siguientes instrumentos:
+
+  - FicTable y el fichero [pulse.wav](work/samples/pulse.wav)
+  - FicTable y el fichero [sawtooth.wav](work/samples/sawtooth.wav)
+  - FicTable y el fichero [triangle.wav](work/samples/triangle.wav)
+  - FicTable y el fichero [white-noise.wav](work/samples/white-noise.wav)
 
   ![Table comparison](img/compare-doremi-seno-vs-doremi-pulse.png)
+  
+  ![Table comparison](img/compare-doremi-seno-vs-doremi-sawtooth.png)
+  
+  ![Table comparison](img/compare-doremi-seno-vs-doremi-triangle.png)
+  
+  ![Table comparison](img/compare-doremi-seno-vs-doremi-white-noise.png)
+  
   *Comparación hecha a bajas frecuencias para apreciar mejor las formas de onda.*
+
+  Usando el fichero [white-noise.wav](work/samples/white-noise.wav) suena como un taladro, pero las
+  notas se diferencian.
 
 *Nota:* Ficheros generados/usados para este ejercicio:
 -   [Instrumentos (.orc)](work/instruments/seno.orc)
 -   [Partitura (.sco)](work/scores/doremi.sco)
--   [Audio DoReMi (.wav)](work/music/doremi.wav)
+-   [Audio DoReMi (.wav)](work/doremi/doremi.wav)
 -   [Pulse (.orc)](work/instruments/pulse.orc)
 -   [Pulse (.wav)](work/samples/pulse.wav)
 -   [Sawtooth (.orc)](work/instruments/sawtooth.orc)
@@ -262,7 +277,7 @@ mediante búsqueda de los valores en una tabla.
 -   [Triangle (.wav)](work/samples/triangle.wav)
 -   [White Noise (.orc)](work/instruments/white-noise.orc)
 -   [White Noise (.wav)](work/samples/white-noise.wav)
--   [Audio DoReMi con pulso (.wav)](work/doremi-music/doremi-pulse.wav)
+-   [Audio DoReMi con pulso (.wav)](work/doremi/doremi-pulse.wav)
 -   [Generar gráfica interpolación (.py)](scripts/plot-interpolation.py)
 -   [Generar gráfica comparación (.py)](scripts/plot-comparison.py)
 -   [Generar pulsos (.py)](scripts/genpulses.py)
@@ -350,8 +365,8 @@ mediante búsqueda de los valores en una tabla.
 -   [Efecto tremolo (.orc)](work/effects/tremolo.orc)
 -   [Efecto vibrato (.orc)](work/effects/vibrato.orc)
 -   [Partitura (.sco)](work/scores/doremi-effects.sco)
--   [Audio DoReMi tremolo (.wav)](work/music/doremi-tremolo.wav)
--   [Audio DoReMi vibrato (.wav)](work/music/doremi-vibrato.wav)
+-   [Audio DoReMi tremolo (.wav)](work/doremi/doremi-tremolo.wav)
+-   [Audio DoReMi vibrato (.wav)](work/doremi/doremi-vibrato.wav)
 -   [Generar graficas (.py)](scripts/plot-effect.py)
 
 ### Síntesis FM.
@@ -493,3 +508,5 @@ Comando a ejecutar:
 synth -g 0.2 work/music/rick.orc work/music/rick.sco work/music/rick.wav
 ```
 Fichero resultante: [rick.wav](work/music/rick.wav)
+
+**_Fin._**
