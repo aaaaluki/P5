@@ -368,12 +368,15 @@ deberá venir expresado en semitonos.
   pueden ver similitudes. A partir de la posición de los picos se pueden obtener `fc` y `fm`, y con
   estimar `N1` y `N2`. También se aprecia que a mayor `I` mayores son los picos.
 
+  La gráfica generada corresponde a la primera nota del archivo [doremi.wav](work/doremi/doremi.wav), el Do
+  central, que tiene como frecuencia 261.63 Hz.
+
   ![Chowning Art. Figure 1](img/chowning-fig1.png)
 
   ![FM FFT comparison](img/fm-comparison.png)
 
-  **TODO: hacer que el script detecte los picos para encontrar fc y fm (para comparar con params), luego
-  esimar los parametros e insertarlos en algun lugar de este apartado**
+  A partir de la posición de los picos de la gráfica se ha estimado fc y fm, partir de estos N1 y N2.
+  Como se puede ver estos coinciden con los parametros usados para generar el señal.
 
   *Solo se esta mostrando la parte 'interesante' del espectro para apreciar mas los detalles.*
   
