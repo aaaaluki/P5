@@ -334,13 +334,14 @@ mediante búsqueda de los valores en una tabla.
 
   Parametros:
   ```text
-  13  Distortion  threshold=0.2; A=4.0; clipping=hard;
+  13  Distortion  threshold=0.2; A=1.0; clipping=hard;
   ```
 
   Para generar el `WAVE`:
   ```bash
   synth --effect-file=work/effects/distortion.orc work/instruments/seno.orc work/scores/doremi-low-effects.sco work/music/doremi-distortion-hard.wav
   ```
+
   #### Distortion (Soft clipping)
   ![Distortion Soft](img/effect-distortion-soft.png)
 
@@ -349,7 +350,7 @@ mediante búsqueda de los valores en una tabla.
 
   Parametros:
   ```text
-  13  Distortion  threshold=0.2; A=4.0; clipping=soft;
+  13  Distortion  threshold=0.2; A=1.0; clipping=soft;
   ```
 
   Para generar el `WAVE`:
@@ -360,13 +361,36 @@ mediante búsqueda de los valores en una tabla.
   Comparación de ambas distorsiones:
   ![Distortions comparison](img/compare-doremi-distortion-hard-vs-doremi-distortion-soft.png)
 
+  #### Gate
+
+  ![Gate](img/effect-gate.png)
+
+  El efecto `Gate` hace lo contrario que la distorsión, si la señal esta por encima de
+  un `threshold` no la modifica, si esta por debajo la pone a cero.
+  Posteriormente se le puede aplicar una ganancia `A`.
+
+  Parametros:
+  ```text
+  13  Gate  threshold=0.2; A=1.0;
+  ```
+
+  Para generar el `WAVE`:
+  ```bash
+  synth --effect-file=work/effects/gate.orc work/instruments/seno.orc work/scores/doremi-low-effects.sco work/music/doremi-gate.wav
+  ```
+
 *Nota:* Ficheros generados/usados para este ejercicio:
 -   [Instrumentos (.orc)](work/instruments/seno.orc)
 -   [Efecto tremolo (.orc)](work/effects/tremolo.orc)
 -   [Efecto vibrato (.orc)](work/effects/vibrato.orc)
+-   [Efecto distorsion (.orc)](work/effects/distortion.orc)
+-   [Efecto gate (.orc)](work/effects/gate.orc)
 -   [Partitura (.sco)](work/scores/doremi-effects.sco)
 -   [Audio DoReMi tremolo (.wav)](work/doremi/doremi-tremolo.wav)
 -   [Audio DoReMi vibrato (.wav)](work/doremi/doremi-vibrato.wav)
+-   [Audio DoReMi distorsion hard (.wav)](work/doremi/doremi-distortion-hard.wav)
+-   [Audio DoReMi distorsion soft (.wav)](work/doremi/doremi-distortion-soft.wav)
+-   [Audio DoReMi distorsion hard (.wav)](work/doremi/doremi-gate.wav)
 -   [Generar graficas (.py)](scripts/plot-effect.py)
 
 ### Síntesis FM.

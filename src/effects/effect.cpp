@@ -1,5 +1,6 @@
 #include <iostream>
 #include "distortion.h"
+#include "gate.h"
 #include "tremolo.h"
 #include "vibrato.h"
 
@@ -18,6 +19,8 @@ namespace upc {
     //    cout << name << ": " << parameters << endl;
     if (name == "Distortion") {
       pEffect = (Effect *) new Distortion(parameters);
+    } else if (name == "Gate") {
+      pEffect = (Effect *) new Gate(parameters);
     } else if (name == "Tremolo") {
       pEffect = (Effect *) new Tremolo(parameters);
     } else if (name == "Vibrato") {

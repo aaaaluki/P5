@@ -1,8 +1,9 @@
 # Programas del proyecto
 
 sources = [
-    'effects/effect.cpp',
     'effects/distortion.cpp',
+    'effects/effect.cpp',
+    'effects/gate.cpp',
     'effects/tremolo.cpp',
     'effects/vibrato.cpp',
     'instruments/fictabla.cpp',
