@@ -4,6 +4,7 @@ import sys
 
 import matplotlib.pyplot as plt
 import numpy as np
+import scipy.io.wavfile as wavf
 
 from config import *
 
@@ -13,17 +14,19 @@ if len(sys.argv) < 2:
     sys.exit(42)
 
 effect_name = sys.argv[1]
-datafile = f'{WORKDIR}/work/graphs/effect-{effect_name}-data.txt'
+reference_file = f'{WORKDIR}/work/doremi/doremi-effects-reference.wav'
+datafile = f'{WORKDIR}/work/doremi/doremi-{effect_name}.wav'
 
 if not os.path.isfile(datafile):
     print(f'[ERROR] The file {datafile} does not exist')
     sys.exit(42)
 
 # Actual graphing (or is it plotting, idk) code
-data = np.loadtxt(datafile)
+_, reference = wavf.read(reference_file)
+_, data = wavf.read(datafile)
 
-data_orig = data[:,0]
-data_effe = data[:,1]
+data_orig = reference / SIGNAL_SCALING
+data_effe = data / SIGNAL_SCALING
 
 ndata = len(data_orig)
 t = np.linspace(0, (ndata - 1)/SAMPLING_FREQ, ndata)

@@ -12,7 +12,6 @@ PLOT = True
 OUT_FILE_DIR = f'{WORKDIR}/work/samples'
 ORC_DIR = f'{WORKDIR}/work/instruments'
 OUT_STR = '1\tFicTabla\tADSR_A=0.02;\tADSR_D=0.1;\tADSR_S=0.4;\tADSR_R=0.1;\tfile=work/samples/{}.wav;\n'
-SCALING = (2**15 - 1)
 N = 64
 
 def plot(x, title):
@@ -52,20 +51,20 @@ t = np.linspace(0, (N-1)/N, N)
 # Sauce for WTF (Write To File): https://docs.scipy.org/doc/scipy/reference/generated/scipy.io.wavfile.write.html
 
 # Sine Wave
-samples = SCALING*np.sin(2*np.pi*t)
+samples = SIGNAL_SCALING*np.sin(2*np.pi*t)
 save_wave('sine', samples)
 
 # Pulse Wave
-samples = SCALING*(2*(t <= 0.5) - 1)
+samples = SIGNAL_SCALING*(2*(t <= 0.5) - 1)
 save_wave('pulse', samples)
 
 # Sawtooth Wave
-samples = SCALING*signal.sawtooth(2 * np.pi * t)
+samples = SIGNAL_SCALING*signal.sawtooth(2 * np.pi * t)
 save_wave('sawtooth', samples)
 
 # Triangle Wave
 shift = 0.75
-samples = SCALING*4*np.abs(t-shift - np.floor(t-shift + 0.5)) - 1
+samples = SIGNAL_SCALING*(4*np.abs(t-shift - np.floor(t-shift + 0.5)) - 1)
 save_wave('triangle', samples)
 
 # White Noise
@@ -73,5 +72,5 @@ save_wave('triangle', samples)
 samples = np.random.normal(0, 1, N)
 maxv = np.max(samples)
 minv = np.min(samples)
-samples = SCALING*(2*(samples - minv) / (maxv - minv) - 1)
+samples = SIGNAL_SCALING*(2*(samples - minv) / (maxv - minv) - 1)
 save_wave('white-noise', samples)

@@ -29,8 +29,8 @@ if not os.path.isfile(fname2):
 fm1, data1 = wavfile.read(fname1)
 fm2, data2 = wavfile.read(fname2)
 
-data1 = data1 / 2**14
-data2 = data2 / 2**14
+data1 = data1 / SIGNAL_SCALING
+data2 = data2 / SIGNAL_SCALING
 
 fname1 = Path(fname1).stem
 fname2 = Path(fname2).stem

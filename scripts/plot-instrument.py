@@ -27,7 +27,7 @@ if not os.path.isfile(datafile):
 sampling_freq, data = wavfile.read(datafile)
 
 # Lets suppose 16 bit per sample
-data = data.astype(np.float32) / (2**15)
+data = data.astype(np.float32) / SIGNAL_SCALING
 
 ndata = len(data)
 

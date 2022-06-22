@@ -33,7 +33,7 @@ data = []
 for f in datafiles:
     # Lets suppose 16 bit per sample
     tmp = np.loadtxt(f)
-    tmp = tmp.astype(np.float32) / (2**15)
+    tmp = tmp.astype(np.float32) / SIGNAL_SCALING
 
     data.append(tmp)
 
