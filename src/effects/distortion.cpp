@@ -40,9 +40,6 @@ void Distortion::operator()(std::vector<float> &x){
   // Nice stuff: https://www.kvraudio.com/forum/viewtopic.php?t=195315
   
   for (unsigned int i = 0; i < x.size(); i++) {
-    // Uncomment to get data for plotting
-    //printf("%.5f\t", x[i]);
-
     x[i] /= threshold;
 
     // First hard clip
@@ -59,8 +56,6 @@ void Distortion::operator()(std::vector<float> &x){
     }
 
     x[i] *= A*threshold;
-
-    //printf("%.5f\n", x[i]);
   }
 }
 

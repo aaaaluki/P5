@@ -246,18 +246,18 @@ mediante búsqueda de los valores en una tabla.
   siguientes instrumentos:
 
   - FicTable y el fichero [pulse.wav](work/samples/pulse.wav)
-  - FicTable y el fichero [sawtooth.wav](work/samples/sawtooth.wav)
-  - FicTable y el fichero [triangle.wav](work/samples/triangle.wav)
-  - FicTable y el fichero [white-noise.wav](work/samples/white-noise.wav)
-
   ![Table comparison](img/compare-doremi-seno-vs-doremi-pulse.png)
   
+  - FicTable y el fichero [sawtooth.wav](work/samples/sawtooth.wav)
   ![Table comparison](img/compare-doremi-seno-vs-doremi-sawtooth.png)
   
+  - FicTable y el fichero [triangle.wav](work/samples/triangle.wav)
   ![Table comparison](img/compare-doremi-seno-vs-doremi-triangle.png)
   
+  - FicTable y el fichero [white-noise.wav](work/samples/white-noise.wav)
   ![Table comparison](img/compare-doremi-seno-vs-doremi-white-noise.png)
   
+
   *Comparación hecha a bajas frecuencias para apreciar mejor las formas de onda.*
 
   Usando el fichero [white-noise.wav](work/samples/white-noise.wav) suena como un taladro, pero las
@@ -302,7 +302,7 @@ mediante búsqueda de los valores en una tabla.
 
   Para generar el `WAVE`:
   ```bash
-  synth --effect-file=work/effects/tremolo.orc work/instruments/seno.orc work/scores/doremi-effects.sco work/music/doremi-tremolo.wav
+  synth --effect-file=work/effects/tremolo.orc work/instruments/seno.orc work/scores/doremi-effects.sco work/doremi/doremi-tremolo.wav
   ```
 
   #### Vibrato
@@ -315,7 +315,7 @@ mediante búsqueda de los valores en una tabla.
 
   Para generar el `WAVE`:
   ```bash
-  synth --effect-file=work/effects/vibrato.orc work/instruments/seno.orc work/scores/doremi-effects.sco work/music/doremi-vibrato.wav
+  synth --effect-file=work/effects/vibrato.orc work/instruments/seno.orc work/scores/doremi-effects.sco work/doremi/doremi-vibrato.wav
   ```
 
 - Si ha generado algún efecto por su cuenta, explique en qué consiste, cómo lo ha implementado y qué
@@ -334,12 +334,12 @@ mediante búsqueda de los valores en una tabla.
 
   Parametros:
   ```text
-  13  Distortion  threshold=0.2; A=1.0; clipping=hard;
+  13  Distortion  threshold=0.25; A=1.0; clipping=hard;
   ```
 
   Para generar el `WAVE`:
   ```bash
-  synth --effect-file=work/effects/distortion.orc work/instruments/seno.orc work/scores/doremi-low-effects.sco work/music/doremi-distortion-hard.wav
+  synth --effect-file=work/effects/distortion.orc work/instruments/seno.orc work/scores/doremi-low-effects.sco work/doremi/doremi-distortion-hard.wav
   ```
 
   #### Distortion (Soft clipping)
@@ -350,18 +350,18 @@ mediante búsqueda de los valores en una tabla.
 
   Parametros:
   ```text
-  13  Distortion  threshold=0.2; A=1.0; clipping=soft;
+  13  Distortion  threshold=0.25; A=1.0; clipping=soft;
   ```
 
   Para generar el `WAVE`:
   ```bash
-  synth --effect-file=work/effects/distortion.orc work/instruments/seno.orc work/scores/doremi-low-effects.sco work/music/doremi-distortion-soft.wav
+  synth --effect-file=work/effects/distortion.orc work/instruments/seno.orc work/scores/doremi-low-effects.sco work/doremi/doremi-distortion-soft.wav
   ```
 
   Comparación de ambas distorsiones:
   ![Distortions comparison](img/compare-doremi-distortion-hard-vs-doremi-distortion-soft.png)
 
-  #### Gate
+  #### Gate (Standard)
 
   ![Gate](img/effect-gate.png)
 
@@ -371,12 +371,28 @@ mediante búsqueda de los valores en una tabla.
 
   Parametros:
   ```text
-  13  Gate  threshold=0.2; A=1.0;
+  13  Gate    threshold_on=0.25; threshold_off=0.25; A=1.0;
   ```
 
   Para generar el `WAVE`:
   ```bash
-  synth --effect-file=work/effects/gate.orc work/instruments/seno.orc work/scores/doremi-low-effects.sco work/music/doremi-gate.wav
+  synth --effect-file=work/effects/gate.orc work/instruments/seno.orc work/scores/doremi-low-effects.sco work/doremi/doremi-gate.wav
+  ```
+
+  #### Gate (Hysteresis)
+
+  ![Gate Hysteresis](img/effect-gate-hysteresis.png)
+
+  El efecto Gate con histéresis, distintos niveles para pasar de ON a OFF.
+
+  Parametros:
+  ```text
+  13  Gate    threshold_on=0.25; threshold_off=0.10; A=1.0;
+  ```
+
+  Para generar el `WAVE`:
+  ```bash
+  synth --effect-file=work/effects/gate.orc work/instruments/seno.orc work/scores/doremi-low-effects.sco work/doremi/doremi-gate-hysteresis.wav
   ```
 
 *Nota:* Ficheros generados/usados para este ejercicio:

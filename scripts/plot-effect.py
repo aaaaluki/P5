@@ -8,14 +8,22 @@ import scipy.io.wavfile as wavf
 
 from config import *
 
+
+LOW = True
+
 # Some arg parsing and error checking
 if len(sys.argv) < 2:
     print('[ERROR] Give the name of the desired effect as the argument')
     sys.exit(42)
 
 effect_name = sys.argv[1]
-reference_file = f'{WORKDIR}/work/doremi/doremi-effects-reference.wav'
 datafile = f'{WORKDIR}/work/doremi/doremi-{effect_name}.wav'
+
+if LOW:
+    reference_file = f'{WORKDIR}/work/doremi/doremi-low-effects-reference.wav'
+else:
+    reference_file = f'{WORKDIR}/work/doremi/doremi-effects-reference.wav'
+
 
 if not os.path.isfile(datafile):
     print(f'[ERROR] The file {datafile} does not exist')

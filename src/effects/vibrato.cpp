@@ -91,14 +91,6 @@ void Vibrato::operator()(std::vector<float> &x){
 
 	while (fase_mod > M_PI) fase_mod -= 2 * M_PI;
 
-
-    // Uncomment to get data for plotting
-    /*
-    for (unsigned int i = 0; i < x.size(); i++) {
-        printf("%.5f\t%.5f\n", x[i], xout[i]);
-    }
-    */
-
 	// Copimos los valores de xout en x
 	x = xout;
 }

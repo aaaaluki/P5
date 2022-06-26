@@ -1,1 +1,1 @@
-13  Gate    threshold=0.2; A=1.0;
+13  Gate    threshold_on=0.25; threshold_off=0.25; A=1.0;
