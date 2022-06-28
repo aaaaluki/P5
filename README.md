@@ -25,8 +25,8 @@ permitan visualizar el funcionamiento de la curva ADSR.
 
 El fichero de los que contiene los instrumentos mostrados a continuación es [dumb.orc](work/dumb.orc).
 
-Las gráficas de los instrumentos con envolvente ADSR estan *bastante* inspiradas en la siguiente
-[imagen](https://blog.landr.com/wp-content/uploads/2016/10/ASDR-01.jpg):
+Las gráficas de los instrumentos con envolvente ADSR estan *bastante* inspiradas en
+una imagen de la siguiente [pagina web](https://blog.landr.com/adsr-envelopes-infographic/), la imagen a continuación:
 
 ![Explicación ADSR](img/sample-graph-adsr.jpeg)
 
@@ -399,7 +399,8 @@ mediante búsqueda de los valores en una tabla.
 
   El efecto Gate con histéresis y tiempos de attack, hold y release.
 
-  En la siguiente imagen se muestran como afectan los tiempos de Attack, Hold y Release:
+  En la siguiente [imagen](https://en.wikipedia.org/wiki/Noise_gate#/media/File:Noise_Gate_Attack_Hold_Release.svg)
+  se muestran como afectan los tiempos de Attack, Hold y Release:
   ![Sample graph](img/sample-graph-gate-ahr.png)
 
   Algunos ejemplos de mi implementación:
