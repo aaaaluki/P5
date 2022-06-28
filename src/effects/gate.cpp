@@ -9,11 +9,13 @@
 using namespace upc;
 using namespace std;
 
-static float SamplingRate = 44100;
+static float SamplingRate = 44100.0f;
+static float Scaling = 1000.0f;  // From .orc file fime to seconds
 
 Gate::Gate(const std::string &param) {
   KeyValue kv(param);
 
+  // Get on/off thresholds
   if (!kv.to_float("threshold_on", threshold_on)) {
     threshold_on = 0.5f; //default value
   }
@@ -28,39 +30,86 @@ Gate::Gate(const std::string &param) {
     threshold_off = 0.001f;
   }
   
+  // Get times (in clock ticks) for attack hold and release
+  // The times on the .orc file are in ms NOT second (thats why there is scaling)
+  float tmp;
+  if (!kv.to_float("attack", tmp)) {
+    tmp = 0.0f;
+  }
+  attack_ticks = tmp * SamplingRate / Scaling;
+
+  if (!kv.to_float("hold", tmp)) {
+    tmp = 0.0f;
+  }
+  hold_ticks = tmp * SamplingRate / Scaling;
+
+  if (!kv.to_float("release", tmp)) {
+    tmp = 0.0f;
+  }
+  release_ticks = tmp * SamplingRate / Scaling;
+
+  // Get the amplification
   if (!kv.to_float("A", A)) {
     A = 1.0f; //default value
   }
 
-  threshold = threshold_off;
   state = State::OFF;
 }
 
 void Gate::command(unsigned int comm) {
   if (comm == 0) {
-    threshold = threshold_off;
-    state = State::OFF;
+    state = State::NOTHING;
   }
 }
 
-void Gate::operator()(std::vector<float> &x){
+void Gate::operator()(std::vector<float> &x) {
   // Sauce: https://en.wikipedia.org/wiki/Noise_gate
-  for (unsigned int i = 0; i < x.size(); i++) {
-    // First hard clip
-    if (abs(x[i]) < threshold) {
-      state = State::OFF;
-    } else {
-      state = State::ON;
-    }
+  for (unsigned int i = 0; i < x.size(); i++, counter++) {
 
     switch (state) {
+    case State::ATTACK:
+      x[i] *= (float)counter / attack_ticks;
+
+      if (counter >= attack_ticks) {
+        state = State::ON;
+        counter = 0;
+      }
+      break;
+    
     case State::ON:
-      threshold = threshold_off;
+      if (abs(x[i]) < threshold_off) {
+        state = State::HOLD;
+        counter = 0;
+      }
+      break;
+    
+    case State::HOLD:
+      if (abs(x[i]) > threshold_on) {
+        state = State::ON;
+        counter = 0;
+
+      } else if (counter >= hold_ticks) {
+        state = State::RELEASE;
+        counter = 0;
+      }
+      break;
+    
+    case State::RELEASE:
+      x[i] *= (float)(release_ticks - counter) / release_ticks;
+
+      if (counter >= release_ticks) {
+        state = State::OFF;
+        counter = 0;
+      }
       break;
     
     case State::OFF:
+      if (abs(x[i]) > threshold_on) {
+        state = State::ATTACK;
+        counter = 0;
+      }
+
       x[i] = 0.0f;
-      threshold = threshold_on;
       break;
     
     default:

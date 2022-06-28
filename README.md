@@ -395,6 +395,41 @@ mediante búsqueda de los valores en una tabla.
   synth --effect-file=work/effects/gate.orc work/instruments/seno.orc work/scores/doremi-low-effects.sco work/doremi/doremi-gate-hysteresis.wav
   ```
 
+  #### Gate (Hysteresis + Attack, Hold & Release)
+
+  El efecto Gate con histéresis y tiempos de attack, hold y release.
+
+  En la siguiente imagen se muestran como afectan los tiempos de Attack, Hold y Release:
+  ![Sample graph](img/sample-graph-gate-ahr.png)
+
+  Algunos ejemplos de mi implementación:
+
+  ![Gate AHR](img/effect-gate-ahr.png)
+
+  Parametros:
+  ```text
+  13  Gate    threshold_on=0.25; threshold_off=0.25; A=1.0; attack=4; hold=10; release=40;
+  ```
+
+  Para generar el `WAVE`:
+  ```bash
+  synth --effect-file=work/effects/gate.orc work/instruments/seno.orc work/scores/doremi-low-effects.sco work/doremi/doremi-gate-ahr.wav
+  ```
+
+  El siguiente al tener un tiempo de hold mayor que medio periodo hace que la gate nunca se cierre.
+
+  ![Gate AHR Long](img/effect-gate-ahr-long.png)
+
+  Parametros:
+  ```text
+  13  Gate    threshold_on=0.25; threshold_off=0.25; A=1.0; attack=30; hold=10; release=40;
+  ```
+
+  Para generar el `WAVE`:
+  ```bash
+  synth --effect-file=work/effects/gate.orc work/instruments/seno.orc work/scores/doremi-low-effects.sco work/doremi/doremi-gate-ahr-long.wav
+  ```
+
 *Nota:* Ficheros generados/usados para este ejercicio:
 -   [Instrumentos (.orc)](work/instruments/seno.orc)
 -   [Efecto tremolo (.orc)](work/effects/tremolo.orc)
@@ -402,6 +437,7 @@ mediante búsqueda de los valores en una tabla.
 -   [Efecto distorsion (.orc)](work/effects/distortion.orc)
 -   [Efecto gate (.orc)](work/effects/gate.orc)
 -   [Partitura (.sco)](work/scores/doremi-effects.sco)
+-   [Partitura low (.sco)](work/scores/doremi-low-effects.sco)
 -   [Audio DoReMi tremolo (.wav)](work/doremi/doremi-tremolo.wav)
 -   [Audio DoReMi vibrato (.wav)](work/doremi/doremi-vibrato.wav)
 -   [Audio DoReMi distorsion hard (.wav)](work/doremi/doremi-distortion-hard.wav)

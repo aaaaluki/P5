@@ -7,15 +7,19 @@
 
 namespace upc {
   class Gate: public upc::Effect {
+    const std::vector<std::string> StateName = {"ON", "ATTACK", "HOLD", "RELEASE", "OFF", "NOTHING"};
     enum State {
       ON,
-      OFF,
       ATTACK,
       HOLD,
-      RELEASE
+      RELEASE,
+      OFF,
+      NOTHING
     };
     private:
-	    float	A, threshold, threshold_on, threshold_off;
+	    float	A, threshold_on, threshold_off;
+      unsigned int attack_ticks, hold_ticks, release_ticks;
+      unsigned int counter;
       State state;
     public:
       Gate(const std::string &param = "");
